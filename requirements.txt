@@ -1,0 +1,6 @@
+atom==0.6.0
+atom-db==0.5.1
+etherscan-python==2.0.2
+web3==5.16.0
+pytest==6.2.2
+hexbytes==0.2.1

@@ -1,6 +1,6 @@
 
 
-def remove_dict_keys(obj, remove_keys=None, empty_keys=False, recursive=False):
+def remove_dict_keys(obj, remove_keys=[], empty_keys=False, recursive=False):
     """ Modify a dictionary by removing items with matching and/or empty keys
 
     Parameters
@@ -27,7 +27,7 @@ def remove_dict_keys(obj, remove_keys=None, empty_keys=False, recursive=False):
         for key in list(obj.keys()):
             if key in list(remove_keys):
                 del obj[key]
-            elif not empty_keys and not obj[key]:
+            elif empty_keys and not obj[key]:
                 del obj[key]
             else:
                 if recursive:

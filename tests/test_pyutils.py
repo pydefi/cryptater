@@ -18,8 +18,7 @@ def test_remove_dict_keys():
     remove_dict_keys(d, remove_keys=['d'], recursive=True)
     assert 'd' not in d[4]
 
-    lst = ['a', 'b', 'c']
-
-    remove_dict_keys(lst, remove_keys=['b'])
-
-    print(lst)
+    d = {'a': 1, 'b': 0, 'c': False, 4: {'d': 6, 'e': 7}}
+    remove_dict_keys(d, empty_keys=True)
+    assert 'b' not in d
+    assert 'c' not in d

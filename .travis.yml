@@ -1,3 +1,6 @@
+# Disable sudo to speed up the build
+sudo: false
+
 language: python
 python:
   - "3.8"
@@ -10,4 +13,8 @@ install:
 
 # command to run tests
 script:
-  - pytest
+  - pytest tests --cov cryptater --cov-report xml
+
+# Push the results back to codecov
+after_success:
+  - codecov

@@ -6,7 +6,8 @@
 # -----------------------------------------------------------------------------
 
 import logging
-
+from pathlib import Path
+import os
 import pytest
 
 import cryptater.logs
@@ -16,6 +17,11 @@ logger = logging.getLogger(__name__)
 
 
 def test_configure_console_logger():
+
+    templogfile = Path('./.tmpdir/log.txt').resolve()
+    if not templogfile.parent.exists():
+        os.makedirs(str(templogfile.parent), exist_ok=True)
+
     root_logger = cryptater.logs.configure_root_logger()
     assert root_logger.level == logging.INFO
     assert isinstance(_get_root_handler(_console_handler_name), logging.Handler)
@@ -24,7 +30,7 @@ def test_configure_console_logger():
     with pytest.raises(NotADirectoryError):
         root_logger = cryptater.logs.configure_root_logger(logfile='./doesnotexist/log.txt')
 
-    root_logger = cryptater.logs.configure_root_logger(logfile='./.cryptater/log.txt')
+    root_logger = cryptater.logs.configure_root_logger(logfile=templogfile)
     assert root_logger.level == logging.INFO
     assert isinstance(_get_root_handler(_console_handler_name), logging.Handler)
     assert isinstance(_get_root_handler(_file_handler_name), logging.Handler)
@@ -32,3 +38,4 @@ def test_configure_console_logger():
     # Change logging level
     cryptater.logs.set_logging_level(level=logging.DEBUG)
     assert root_logger.level == logging.DEBUG
+

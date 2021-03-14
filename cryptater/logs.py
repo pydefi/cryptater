@@ -47,6 +47,8 @@ def configure_root_logger(level=logging.INFO, logformat=default_log_format, logf
         ch.setLevel(level)
         ch.setFormatter(logging.Formatter(logformat))
         rootlogger.addHandler(ch)
+        set_logging_level(level)
+        logger.info('New console logging session created %s' % str(datetime.datetime.now()))
 
     fh = _get_root_handler(_file_handler_name)
 
@@ -65,11 +67,8 @@ def configure_root_logger(level=logging.INFO, logformat=default_log_format, logf
             fh.setLevel(level)
             fh.setFormatter(logging.Formatter(logformat))
             rootlogger.addHandler(fh)
-
-    # Set logger levels
-    if not ch or not fh:
-        set_logging_level(level)
-        logger.info('New logging session created %s' % str(datetime.datetime.now()))
+            set_logging_level(level)
+            logger.info('New file logging session created %s' % str(datetime.datetime.now()))
 
     return rootlogger
 

@@ -1,6 +1,6 @@
 
 from atom.api import Int, Str
-from cryptater.model.base import Base, to_json, from_json
+from cryptater.app.base import Base, to_json, from_json
 
 class BaseSubclass(Base):
     name = Str()
@@ -20,7 +20,7 @@ def test_encode_model():
 
     obj = BaseSubclass(amount=5, name='Aloysius')
     state = to_json(obj)
-    assert state['__model__'] == 'tests.test_base.BaseSubclass'
+    assert state['__model__'] == 'tests.test_app_base.BaseSubclass'
     assert state['name'] == 'Aloysius'
 
 def test_from_json():
@@ -28,10 +28,10 @@ def test_from_json():
 
     """
 
-    state = {'__model__': 'tests.test_base.BaseSubclass', '__ref__': '9230a086921eae1f94b6fcdb1940cc', '_id': '', 'name': 'frank', 'amount': 5}
+    state = {'__model__': 'tests.test_app_base.BaseSubclass', '__ref__': '9230a086921eae1f94b6fcdb1940cc', '_id': '', 'name': 'frank', 'amount': 5}
     obj = from_json(state)
 
-    state = {'__model__': 'tests.test_base.BaseSubclass', 'name': 'Bartholemew', 'amount': 5}
+    state = {'__model__': 'tests.test_app_base.BaseSubclass', 'name': 'Bartholemew', 'amount': 5}
     obj = from_json(state)
     assert isinstance(obj, BaseSubclass)
     assert obj.amount == 5

@@ -14,21 +14,31 @@ from cryptater.app.app import AppModel
 
 def test_app_constructor():
     # Create an appliation
-    t = AppModel('SuperApp')
+    app = AppModel('SuperApp')
 
     # Prevent creating two Applications
     with pytest.raises(RuntimeError):
-        t = AppModel('SuperApp')
+        app = AppModel('SuperApp')
 
     # Destroy existing app
-    t = AppModel.destroy()
+    app.destroy()
 
     # Create a new app using local home folder
     os.mkdir('.tmp')
-    t = AppModel('SuperApp', home='.tmp')
-    t = AppModel.destroy()
+    app = AppModel('SuperApp', home='.tmp')
+    app.destroy()
 
     # Try to use non-existent directory
     with pytest.raises(NotADirectoryError):
         os.rmdir('.tmp')
-        t = AppModel('SuperApp', home='.tmp')
+        app = AppModel('SuperApp', home='.tmp')
+
+    # Test app getter (create from scratch)
+    app.destroy()
+    app1 = AppModel('NewApp').get()
+
+    # Re-get existing app object
+    app2 = AppModel.get()
+
+    assert app1 is app2
+

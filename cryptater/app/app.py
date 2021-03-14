@@ -38,11 +38,6 @@ class AppModel(Atom):
         self._name = name
 
         self._home = AppHomeDirectory('myapp', force=home)
-        # # Set home directory
-        # if home:
-        #     self._home = Path(home).resolve()
-        # else:
-        #     self._home = get_cryptater_home()
 
         logger.info('Using Application Home: {}'.format(self._home))
 
@@ -51,30 +46,26 @@ class AppModel(Atom):
         # to constructor
         super(AppModel, self).__init__(**kwargs)
 
-        logger.info('Tater is baked and ready.')
+        logger.info('Created new {} application'.format(self.name))
 
     def __new__(cls, *args, **kwargs):
-        """ Create a Tater
+        """ Create a new App
 
         """
         if AppModel._instance is not None:
-            raise RuntimeError('A Tater already exists')
+            raise RuntimeError('An application already exists')
         self = super(AppModel, cls).__new__(cls, *args, **kwargs)
         AppModel._instance = self
         return self
 
     @staticmethod
     def get():
-        """ Dig up the global instance
+        """ Get the global app instance
 
-        If none exists, one will be created.
         """
-        if not AppModel._instance:
-            AppModel()
         return AppModel._instance
 
-    @staticmethod
-    def destroy():
+    def destroy(self):
         """ Destroy the instance.
 
         """

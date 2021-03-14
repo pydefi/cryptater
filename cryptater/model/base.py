@@ -6,9 +6,7 @@
 # -----------------------------------------------------------------------------
 
 import asyncio
-import json
 
-from atom.api import Str
 from atomdb.base import JSONModel
 from atomdb.base import JSONSerializer
 

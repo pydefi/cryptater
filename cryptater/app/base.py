@@ -6,15 +6,13 @@
 # -----------------------------------------------------------------------------
 
 import asyncio
-import json
 
-from atom.api import Str
 from atomdb.base import JSONModel
 from atomdb.base import JSONSerializer
 
 
 class Base(JSONModel):
-    """ Base class for cryptater objects
+    """ Base class for application objects
 
     This class is used as a model class that supports typed attributes,
     and conversion to/from and JSON objects

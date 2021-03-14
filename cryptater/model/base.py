@@ -20,8 +20,7 @@ class Base(JSONModel):
     and conversion to/from and JSON objects
     """
 
-    #: Object name
-    name = Str()
+    pass
 
 
 def from_json(state, scope=None):

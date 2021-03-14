@@ -3,8 +3,8 @@ from atom.api import Int, Str
 from cryptater.model.base import Base, to_json, from_json
 
 class BaseSubclass(Base):
-    amount = Int()
     name = Str()
+    amount = Int()
 
 def test_class_state():
 

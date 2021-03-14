@@ -16,12 +16,11 @@ from atomdb.base import JSONSerializer
 class Base(JSONModel):
     """ Base class for cryptater objects
 
-    This class is used as a data class that supports typed attributes,
+    This class is used as a model class that supports typed attributes,
     and conversion to/from and JSON objects
     """
 
-    #: Object name
-    name = Str()
+    pass
 
 
 def from_json(state, scope=None):
